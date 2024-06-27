@@ -1,4 +1,4 @@
-import { login } from "./actions";
+import { register } from "./actions";
 import {
   Card,
   CardContent,
@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
 export default function LoginPage() {
 
@@ -19,11 +19,8 @@ export default function LoginPage() {
             <CardTitle>Login</CardTitle>
           </CardHeader>
           <CardContent>
-            <LoginForm login={login} />
+            <RegisterForm register={register} />
           </CardContent>
-          {/* <CardFooter>
-            <p>Card Footer</p>
-          </CardFooter> */}
         </Card>
       </div>
     </main>

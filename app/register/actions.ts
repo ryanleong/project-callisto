@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import schema from "./formSchema";
 
-export async function login(prevState: any, formData: FormData) {
+export async function register(prevState: any, formData: FormData) {
   let redirectPath = null;
 
   try {
@@ -15,6 +15,7 @@ export async function login(prevState: any, formData: FormData) {
     const data = {
       email: formData.get("email") as string,
       password: formData.get("password") as string,
+      passwordConfirmation: formData.get("passwordConfirmation") as string,
     };
 
     const validation = schema.safeParse(data);
@@ -29,7 +30,8 @@ export async function login(prevState: any, formData: FormData) {
       return { errors };
     }
 
-    const { error } = await supabase.auth.signInWithPassword(data);
+    const { error } = await supabase.auth.signUp(data);
+    console.log(error);
 
     if (error) {
       return { genericError: error.message };
