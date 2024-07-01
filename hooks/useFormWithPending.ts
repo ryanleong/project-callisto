@@ -2,12 +2,12 @@
  * Base of this:
  * https://allanlasser.com/posts/2024-01-26-avoid-using-reacts-useformstatus
  */
-import { SyntheticEvent, useTransition } from "react";
-import { useFormState } from "react-dom";
+import { SyntheticEvent, useTransition } from 'react';
+import { useFormState } from 'react-dom';
 
 type Action<FormState> = (
   formState: Awaited<FormState>,
-  formData: FormData
+  formData: FormData,
 ) => Promise<FormState>;
 
 export interface UseFormWithPendingProps<FormState> {
@@ -26,9 +26,8 @@ export interface UseFormHook<FormState> {
 }
 
 export default function useFormWithPending<FormState>(
-  props: UseFormWithPendingProps<FormState>
+  props: UseFormWithPendingProps<FormState>,
 ): UseFormHook<FormState> {
-
   const { action, formRef, initialState, form } = props;
   const [isPending, startTransition] = useTransition();
   const [formState, formAction] = useFormState(action, initialState);

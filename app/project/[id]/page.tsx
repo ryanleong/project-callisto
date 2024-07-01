@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const PageProject = () => {
-  return (
-    <div>PageProject</div>
-  )
-}
+  return <div>PageProject</div>;
+};
 
 export default PageProject;

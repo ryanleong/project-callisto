@@ -1,10 +1,10 @@
-"use server";
+'use server';
 
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
-import { createClient } from "@/utils/supabase/server";
-import schema from "./formSchema";
+import { createClient } from '@/utils/supabase/server';
+import schema from './formSchema';
 
 export async function login(prevState: any, formData: FormData) {
   let redirectPath = null;
@@ -13,8 +13,8 @@ export async function login(prevState: any, formData: FormData) {
     const supabase = createClient();
 
     const data = {
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
     };
 
     const validation = schema.safeParse(data);
@@ -34,13 +34,13 @@ export async function login(prevState: any, formData: FormData) {
     if (error) {
       return { genericError: error.message };
     } else {
-      revalidatePath("/", "layout");
-      redirectPath = "/";
+      revalidatePath('/', 'layout');
+      redirectPath = '/';
     }
   } catch (error) {
     console.log(error);
     return {
-      genericError: "Something went wrong. Please try again later.",
+      genericError: 'Something went wrong. Please try again later.',
     };
   } finally {
     if (redirectPath) redirect(redirectPath);

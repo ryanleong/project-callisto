@@ -1,4 +1,4 @@
-import { login } from "./actions";
+import { login } from './actions';
 import {
   Card,
   CardContent,
@@ -6,11 +6,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import LoginForm from "./LoginForm";
+} from '@/components/ui/card';
+import LoginForm from './LoginForm';
 
 export default function LoginPage() {
-
   return (
     <main className="container mx-auto px-4">
       <div className="min-h-screen flex justify-center items-center">

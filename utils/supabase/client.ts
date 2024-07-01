@@ -1,4 +1,4 @@
-import { createBrowserClient } from '@supabase/ssr'
+import { createBrowserClient } from '@supabase/ssr';
 
 // Add clerk to Window to avoid type errors
 declare global {
@@ -21,7 +21,7 @@ export function createClient() {
 
           // Construct fetch headers
           const headers = new Headers(options?.headers);
-          headers.set("Authorization", `Bearer ${clerkToken}`);
+          headers.set('Authorization', `Bearer ${clerkToken}`);
 
           // Now call the default fetch
           return fetch(url, {
@@ -30,7 +30,7 @@ export function createClient() {
           });
         },
       },
-    }
+    },
   );
 }
 

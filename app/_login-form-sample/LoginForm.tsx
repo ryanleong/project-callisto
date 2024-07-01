@@ -1,9 +1,9 @@
-"use client";
-import React, { FC, useEffect, useRef } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Loader2 } from "lucide-react";
-import { z } from "zod";
+'use client';
+import React, { FC, useEffect, useRef } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Loader2 } from 'lucide-react';
+import { z } from 'zod';
 
 import {
   Form,
@@ -12,12 +12,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import schema from "./formSchema";
-import useFormWithPending from "@/hooks/useFormWithPending";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import schema from './formSchema';
+import useFormWithPending from '@/hooks/useFormWithPending';
 
 interface LoginFormProps {
   login: (prevState: any, formData: FormData) => any;
@@ -29,8 +29,8 @@ const LoginForm: FC<LoginFormProps> = (props) => {
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
   const { formState, isPending, formAction, onSubmit } = useFormWithPending({
@@ -51,7 +51,6 @@ const LoginForm: FC<LoginFormProps> = (props) => {
       form.setError(name, { message });
     });
   }, [formState?.errors]);
-
 
   const renderGenericError = () => {
     if (!formState?.genericError) return;

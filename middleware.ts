@@ -1,9 +1,9 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
 const isPublicRoute = createRouteMatcher(['/', '/error']);
 
 export default clerkMiddleware((auth, request) => {
-  if(!isPublicRoute(request)) {
+  if (!isPublicRoute(request)) {
     auth().protect();
   }
 });

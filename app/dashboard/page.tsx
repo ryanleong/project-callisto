@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const PageDashboard = () => {
-  return (
-    <div>PageDashboard</div>
-  )
-}
+  return <div>PageDashboard</div>;
+};
 
 export default PageDashboard;

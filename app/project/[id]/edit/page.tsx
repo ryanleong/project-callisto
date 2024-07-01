@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const PageProjectEdit = () => {
-  return (
-    <div>PageProjectEdit</div>
-  )
-}
+  return <div>PageProjectEdit</div>;
+};
 
 export default PageProjectEdit;
