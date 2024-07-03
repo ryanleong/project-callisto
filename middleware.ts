@@ -1,36 +1,23 @@
 import { NextResponse } from 'next/server';
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import createMiddleware from 'next-intl/middleware';
 
 import { locales } from '@/translations/config';
-import { getLocale } from '@/utils/locale';
 
-const i18nMiddleware = async (request: any) => {
-  // Check if there is any supported locale in the pathname
-  const { pathname } = request.nextUrl;
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
-  );
+const rootPathWithLocale = locales.map((locale) => `/${locale}`);
+const localePathsRegex = locales.map((locale) => `/${locale}`).join('|');
+const isPublicRoute = createRouteMatcher([
+  '/',
+  ...rootPathWithLocale,
+  `(${localePathsRegex})*/error`,
+]);
 
-  if (pathnameHasLocale) return;
-
-  // Redirect if there is no locale
-  const locale = getLocale(request, locales);
-  request.nextUrl.pathname = `/${locale}${pathname}`;
-  // e.g. incoming request is /products
-  // The new URL is now /en-US/products
-  return NextResponse.redirect(request.nextUrl);
-};
+const i18nMiddleware = createMiddleware({
+  locales,
+  defaultLocale: 'en',
+});
 
 export default clerkMiddleware((auth, request) => {
-  const rootPathWithLocale = locales.map((locale) => `/${locale}`);
-  const localePathsRegex = locales.map((locale) => `/${locale}`).join('|');
-
-  const isPublicRoute = createRouteMatcher([
-    '/',
-    ...rootPathWithLocale,
-    `(${localePathsRegex})*/error`,
-  ]);
-
   if (!isPublicRoute(request)) {
     auth().protect();
   }
