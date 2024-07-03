@@ -1,11 +1,5 @@
 import type { Metadata } from 'next';
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs';
+import { ClerkProvider, SignedIn, UserButton } from '@clerk/nextjs';
 import { getMessages } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
@@ -42,9 +36,9 @@ export default async function RootLayout({
             >
               <header>
                 {/* Update to use proper sign in page */}
-                <SignedOut>
+                {/* <SignedOut>
                   <SignInButton />
-                </SignedOut>
+                </SignedOut> */}
                 <SignedIn>
                   <UserButton />
                 </SignedIn>

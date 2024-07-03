@@ -1,16 +1,24 @@
-import { NextResponse } from 'next/server';
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import createMiddleware from 'next-intl/middleware';
 
 import { locales } from '@/translations/config';
-
-const rootPathWithLocale = locales.map((locale) => `/${locale}`);
-const localePathsRegex = locales.map((locale) => `/${locale}`).join('|');
-const isPublicRoute = createRouteMatcher([
+const publicRoutes = [
   '/',
-  ...rootPathWithLocale,
-  `(${localePathsRegex})*/error`,
-]);
+  '/auth/signin(.*)',
+  '/auth/signout(.*)',
+  '/auth/register(.*)',
+  '/error',
+];
+const publicRoutesWithLocales = publicRoutes.reduce(
+  (acc: string[], route: string) => {
+    acc.push(route);
+    // remove trailing slash
+    acc.push(`/:locale${route}`.replace(/\/$/, ''));
+    return acc;
+  },
+  [],
+);
+const isPublicRoute = createRouteMatcher(publicRoutesWithLocales);
 
 const i18nMiddleware = createMiddleware({
   locales,
