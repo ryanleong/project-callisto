@@ -10,7 +10,7 @@ export async function login(prevState: any, formData: FormData) {
   let redirectPath = null;
 
   try {
-    const supabase = createClient();
+    const supabase = await createClient();
 
     const data = {
       email: formData.get('email') as string,
